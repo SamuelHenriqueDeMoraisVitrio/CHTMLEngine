@@ -1,29 +1,35 @@
 
 #include "../uniq.definitions_requirements.h"
 
-char* substituir_marcadores(const char* (*func)(void), const char* substituicoes[], size_t num_substituicoes) {
-    // Contar o número de marcadores na string HTML
+void private_CTextEngineText_free(CTextEngineText *self) {
+    if (self) {
+        if (self->render_text) {
+            free(self->render_text);
+        }
+        free(self);
+    }
+}
+
+CTextEngineText *CTextEngine_render_text(const char* (*func)(void), const char* substituicoes[], size_t num_substituicoes) {
+    CTextEngineText *self = {0};
+
     size_t num_marcadores = 0;
     const char* ptr = func();
     while ((ptr = strstr(ptr, "%s")) != NULL) {
         ++num_marcadores;
-        ptr += 2; // Avançar o ponteiro após "%s"
+        ptr += 2;
     }
 
-    // Verificar se o número de substituições é suficiente
     if (num_marcadores != num_substituicoes) {
-        return NULL; // Erro: número de substituições não corresponde ao número de marcadores
+        return NULL;
     }
 
-    // Alocar memória para o resultado final
     size_t resultado_tamanho = strlen(func()) + 1;
     char* resultado = malloc(resultado_tamanho);
     if (!resultado) return NULL;
 
-    // Inicializar o resultado com a string HTML
     strcpy(resultado, func());
 
-    // Substituir os marcadores
     for (size_t i = 0; i < num_substituicoes; ++i) {
         char marcador[3] = "%s";
         char* pos = strstr(resultado, marcador);
@@ -31,7 +37,6 @@ char* substituir_marcadores(const char* (*func)(void), const char* substituicoes
             size_t antes_marcador = pos - resultado;
             size_t depois_marcador = strlen(pos + 2);
 
-                // Recriar a string resultado com o novo marcador substituído
                 resultado = realloc(resultado, antes_marcador + strlen(substituicoes[i]) + depois_marcador + 1);
                 if (!resultado) return NULL;
     
@@ -40,5 +45,9 @@ char* substituir_marcadores(const char* (*func)(void), const char* substituicoes
         }
     }
 
-    return resultado;
+    self->render_text = resultado;
+    self->size = sizeof(resultado);
+
+    return self;
 }
+
