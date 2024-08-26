@@ -1,7 +1,7 @@
 
 #include "../uniq.definitions_requirements.h"
 
-void private_CTextEngineText_free(CTextEngineText *self) {
+void private_CHtmlEngineText_free(CTextEngine *self) {
     if (self) {
         if (self->render_text) {
             free(self->render_text);
@@ -10,8 +10,8 @@ void private_CTextEngineText_free(CTextEngineText *self) {
     }
 }
 
-CTextEngineText *CTextEngine_render_text(const char* (*func)(void), const char* substituicoes[], size_t num_substituicoes) {
-    CTextEngineText *self = {0};
+CTextEngine *CHtmlEngine_render_text(const char* (*func)(void), const char* substituicoes[], size_t num_substituicoes) {
+    CTextEngine *self = {0};
 
     size_t num_marcadores = 0;
     const char* ptr = func();
