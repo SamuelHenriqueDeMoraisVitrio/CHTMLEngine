@@ -1,5 +1,6 @@
 
 #include "../uniq.declarations_requirements.h"
 
-CTextEngine *CHtmlEngine_render_text(const char* (*func)(void), const char* substituicoes[], size_t num_substituicoes);
-
+void private_free_TextEngine(CTextEngine *self);
+size_t private_count_replaces(const char **substituicoes);
+CTextEngine *private_CHtmlEngine_text_replacement(const char* (*func)(void), const char **substituicoes);

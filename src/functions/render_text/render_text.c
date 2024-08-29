@@ -1,23 +1,35 @@
 
 #include "../uniq.definitions_requirements.h"
 
-void private_CHtmlEngineText_free(CTextEngine *self) {
-    if (self) {
-        if (self->render_text) {
+void private_free_TextEngine(CTextEngine *self){
+    if(self){
+        if(self->render_text){
             free(self->render_text);
         }
         free(self);
     }
 }
 
-CTextEngine *CHtmlEngine_render_text(const char* (*func)(void), const char* substituicoes[], size_t num_substituicoes) {
-    CTextEngine *self = {0};
+size_t private_count_replaces(const char **substituicoes) {
+    size_t count = 0;
+
+    // Conta até encontrar um ponteiro NULL
+    while (substituicoes[count] != NULL) {
+        count++;
+    }
+
+    return count;
+}
+
+CTextEngine *private_CHtmlEngine_text_replacement(const char* (*func)(void), const char **substituicoes) {
+    struct CTextEngine *self = (struct CTextEngine *)malloc(sizeof(CTextEngine));
 
     size_t num_marcadores = 0;
+    size_t num_substituicoes = private_count_replaces(substituicoes);
     const char* ptr = func();
-    while ((ptr = strstr(ptr, "%s")) != NULL) {
+    while ((ptr = strstr(ptr, "{%s}")) != NULL) {
         ++num_marcadores;
-        ptr += 2;
+        ptr += 4;
     }
 
     if (num_marcadores != num_substituicoes) {
@@ -47,6 +59,8 @@ CTextEngine *CHtmlEngine_render_text(const char* (*func)(void), const char* subs
 
     self->render_text = resultado;
     self->size = sizeof(resultado);
+    self->replaces_require = (long)num_substituicoes;
+    self->replacements = (long)num_marcadores;
 
     return self;
 }

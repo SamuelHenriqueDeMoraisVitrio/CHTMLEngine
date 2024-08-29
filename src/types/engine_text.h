@@ -6,7 +6,8 @@ typedef struct CTextEngine{
 
   char *render_text;
   long size;
-  void (*free)(struct CTextEngine *self);
+  long replaces_require;
+  long replacements;
 
 }CTextEngine;
 
