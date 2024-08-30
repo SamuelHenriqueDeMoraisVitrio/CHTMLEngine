@@ -4,13 +4,13 @@
 
 
 
-void add_link_replacement(LinkReplacement **head, const char *name, const char *value) {
-    LinkReplacement *new_link = create_link_replacement(name, value);
+void private_add_link_replacement(LinkReplacement **head, const char *name, const char *value) {
+    LinkReplacement *new_link = private_create_link_replacement(name, value);
     new_link->next = *head;
     *head = new_link;
 }
 
-void free_link_replacements(LinkReplacement *head) {
+void private_free_link_replacements(LinkReplacement *head) {
     LinkReplacement *temp;
     while (head) {
         temp = head;

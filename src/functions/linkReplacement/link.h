@@ -1,6 +1,6 @@
 
 #include "../uniq.declarations_requirements.h"
 
-void add_link_replacement(LinkReplacement **head, const char *name, const char *value);
+void private_add_link_replacement(LinkReplacement **head, const char *name, const char *value);
 
-void free_link_replacements(LinkReplacement *head);
+void private_free_link_replacements(LinkReplacement *head);

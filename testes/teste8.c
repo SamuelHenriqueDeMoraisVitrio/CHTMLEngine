@@ -7,7 +7,7 @@
 typedef struct LinkReplacement {
     char *name;
     char *value;
-    struct LinkReplacement *next;
+  struct LinkReplacement *next;
 } LinkReplacement;
 
 // Estrutura para armazenar o texto formatado

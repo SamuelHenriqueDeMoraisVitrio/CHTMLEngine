@@ -41,7 +41,6 @@ int main(){
 
   engine = new_CEngineNamespace();
 
-
   create_html();
 
   return 0;
