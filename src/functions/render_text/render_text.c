@@ -1,6 +1,5 @@
 
 #include "../uniq.definitions_requirements.h"
-#include <stdio.h>
 
 void private_free_TextEngine(CTextEngine *self){
     if(self){
