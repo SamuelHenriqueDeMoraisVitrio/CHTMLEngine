@@ -128,7 +128,7 @@ void free_CTextEngine(CTextEngine *engine) {
 // Exemplo de função de texto usando a macro
 CreateTextInEngine(home,
     <html>
-      <head></head>
+      <head>{%s}</head>
       <body>
         <h1>{{nome}}</h1>
       </body>
@@ -138,7 +138,8 @@ CreateTextInEngine(home,
 int main() {
     // Cria substituições baseadas em nomes
     LinkReplacement *links = NULL;
-    add_link_replacement(&links, "nome", "Samuel");
+    const char *nome = "samuel";
+    add_link_replacement(&links, "nome", nome);
 
     // Cria o engine com substituições baseadas em nomes
     CTextEngine *home_formated = new_CTextEngine(home, links);

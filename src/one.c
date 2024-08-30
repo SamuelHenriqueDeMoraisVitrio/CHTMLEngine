@@ -5,6 +5,8 @@
 
 #endif //PRIVATE_CTEXTENGINE_ONE_C
 
+#define FOR forInEngine
+
 CEngineNamespace engine;
 
 CreateTextInEngine(home,
