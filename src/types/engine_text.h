@@ -5,11 +5,10 @@
 #include "linkReplacement.h"
 typedef struct CTextEngine{
 
-  char *render_text;
   long size;
-  long replaces_require;
-  long replacements;
-  LinkReplacement *self_link_by_name;
+  const char *text;
+  LinkReplacement *link_name;
+  const char **replacements;
 
 }CTextEngine;
 
