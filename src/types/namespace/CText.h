@@ -12,7 +12,7 @@ typedef struct CText{
   void (*add_link_name_by_float)(CTextEngine *self, const char *name, double value);
   void (*add_link_name_by_bool)(CTextEngine *self, const char *name, bool value);
   void (*add_replacements)(CTextEngine *self, const char **replacements);
-  char *(*render_text)(CTextEngine *self);
+  void (*render_text)(CTextEngine *self);
   void (*free_CText)(CTextEngine *self);
 
 

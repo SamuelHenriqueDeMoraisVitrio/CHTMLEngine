@@ -2,12 +2,10 @@
 #define PRIVATE_CTEXTENGINE_ONE_C
 
 #include "definitions.c"
-#include "types/engine_text.h"
-#include <stdio.h>
 
 #endif //PRIVATE_CTEXTENGINE_ONE_C
 
-
+/*
 CEngineNamespace engine;
 
 CreateTextInEngine(HOME,
@@ -35,6 +33,11 @@ void create_html(){
 
   engine.CText.add_replacements(home, replacements);
 
+  engine.CText.add_link_name_by_string(home, "name", "Samuel");
+
+  engine.CText.render_text(home);
+
+  printf("\n\t%s\n\n", home->text_rederized);
   
   engine.CText.free_CText(home);
 }
@@ -47,3 +50,5 @@ int main(){
 
   return 0;
 }
+
+*/

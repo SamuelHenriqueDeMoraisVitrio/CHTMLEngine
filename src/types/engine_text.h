@@ -9,6 +9,7 @@ typedef struct CTextEngine{
   const char *text;
   LinkReplacement *link_name;
   const char **replacements;
+  char *text_rederized;
 
 }CTextEngine;
 

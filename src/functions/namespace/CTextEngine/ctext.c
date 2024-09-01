@@ -24,6 +24,7 @@ CTextEngine *private_CEngine_Text_new_struct(const char *(*func)(void)){
   self->text = func();
   self->size = strlen(func());
   self->link_name = NULL;
+  self->text_rederized = NULL;
   
   return self;
 }

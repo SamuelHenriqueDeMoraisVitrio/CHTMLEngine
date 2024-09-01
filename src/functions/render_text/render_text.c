@@ -5,6 +5,9 @@
 
 void private_free_TextEngine(CTextEngine *self){
     if(self){
+        if(self->text_rederized){
+            free(self->text_rederized);
+        }
         private_free_link_replacements(self);
         free(self);
     }
@@ -69,7 +72,7 @@ CTextEngine *private_CHtmlEngine_text_replacement(const char* (*func)(void), con
         return private_CEngine_Refactor_text_self(resultado, num_substituicoes, num_marcadores);
 }
 */
-char *private_CEngine_text_replacement_by_links_name(CTextEngine *self){
+void private_CEngine_text_replacement_by_links_name(CTextEngine *self){
 
     size_t num_marcadores = private_umount_markes(self->text);
     size_t num_substituicoes = private_count_replaces(self->replacements);
@@ -93,7 +96,7 @@ char *private_CEngine_text_replacement_by_links_name(CTextEngine *self){
     if (!resultado){
 
         free(resultado);
-        return NULL;
+        return;
     }
 
     strcpy(resultado, self->text);
@@ -109,7 +112,7 @@ char *private_CEngine_text_replacement_by_links_name(CTextEngine *self){
 
             if(!resultado){
                 free(resultado);
-                return NULL;
+                return;
             }
     
             memmove(pos + strlen(self->replacements[i]), pos + 4, depois_marcador + 1);
@@ -130,7 +133,7 @@ char *private_CEngine_text_replacement_by_links_name(CTextEngine *self){
             resultado = realloc(resultado, antes_marcador + strlen(current->value) + depois_marcador + 1);
             if (!resultado){
                 free(resultado);
-                return NULL;
+                return;
             }
 
             memmove(pos + strlen(current->value), pos + strlen(marcador), depois_marcador + 1);
@@ -140,7 +143,7 @@ char *private_CEngine_text_replacement_by_links_name(CTextEngine *self){
     }
 
 
-    return resultado;
+    self->text_rederized = resultado;
 }
 
 
